@@ -12,18 +12,22 @@ struct CheckBoxView: View {
         self.profile = profile
         self.category = category
         self.appLogic = appLogic
-        self._isChecked = State(initialValue: !item.needsToBuy)
+        self._isChecked = State(initialValue: item.needsToBuy)
     }
 
     var body: some View {
         Button(action: {
-            isChecked.toggle()
-            item.needsToBuy = !isChecked
-            saveChanges()
+            toggleCheckBox()
         }) {
             Image(systemName: isChecked ? "checkmark.square" : "square")
                 .foregroundColor(isChecked ? .green : .red)
         }
+    }
+
+    func toggleCheckBox() {
+        isChecked.toggle()
+        item.needsToBuy = isChecked
+        saveChanges()
     }
 
     private func saveChanges() {

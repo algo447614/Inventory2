@@ -20,11 +20,25 @@ struct ShoppingListView: View {
                                                         .resizable()
                                                         .frame(width: 30, height: 30)
                                                 }
-                                                Text(item.name)
+                                                VStack(alignment: .leading) {
+                                                    Text(item.name)
+                                                        .contextMenu {
+                                                            Button(action: {
+                                                                if let url = URL(string: item.link) {
+                                                                    UIApplication.shared.open(url)
+                                                                }
+                                                            }) {
+                                                                Text("Open Link")
+                                                                Image(systemName: "link")
+                                                            }
+                                                        }
+                                                    Text("$\(item.price, specifier: "%.2f")")
+                                                        .font(.subheadline)
+                                                }
                                                 Spacer()
-                                                Text("$\(item.price, specifier: "%.2f")")
                                                 CheckBoxView(item: item, profile: profile, category: category, appLogic: appLogic)
                                             }
+                                            .contentShape(Rectangle()) // Make the entire row clickable for the checkbox
                                         }
                                     }
                                 }

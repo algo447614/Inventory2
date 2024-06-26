@@ -45,7 +45,7 @@ struct EditProfileView: View {
     }
 
     private func saveChanges() {
-        let updatedProfile = Profile(name: name, customImage: customImage)
+        _ = Profile(name: name, customImage: customImage)
         appLogic.editProfile(oldName: profile.name, newName: name, newCustomImage: customImage)
     }
 }
